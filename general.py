@@ -2,12 +2,7 @@ import sys
 import requests
 import bs4
 import re
-from lxml import html
 
-session_requests = requests.session()
-initial_page = "https://bombayhighcourt.nic.in/case_query.php"
-result = session_requests.get(initial_page)
-tree = html.fromstring(result.text)
 
 if len(sys.argv) == 3:
     url = sys.argv[1]
@@ -18,7 +13,7 @@ if len(sys.argv) == 3:
     response.raise_for_status()
 
     soup = bs4.BeautifulSoup(response.text, 'html.parser')
-    links = soup.find_all('a', href=re.compile('https://bombayhighcourt.nic.in/casequery_action.php?))
+    links = soup.find_all('a', href=re.compile('https:'))
 
     file = open(file_name, 'wb')
     print('Collecting the links...')
